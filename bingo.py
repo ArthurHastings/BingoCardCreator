@@ -69,7 +69,7 @@ class Bingo:
                 self.photo = ImageTk.PhotoImage(self.img)
                 self.images.append(self.photo)
 
-                self.label = tk.Label(self.matrix_frame, image=self.photo)
+                self.label = tk.Label(self.matrix_frame, image=self.photo, border="2", background="black")
                 self.label.grid(row=i, column=j, padx=0, pady=0)
             
 
