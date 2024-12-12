@@ -31,7 +31,12 @@ class Bingo:
         self.bingo_size = list(self.dimensions_bingo_card.get().split(" "))
         for i in range(len(self.bingo_size)):
             self.bingo_size[i] = int(self.bingo_size[i])
+
         self.n, self.m = tuple(self.bingo_size)
+
+        if self.n * self.m > len(images_list):
+            messagebox.showerror(message="The bingo card is too big!", title="Error!")
+            root.quit()
 
         self.title.pack_forget()
         self.input.pack_forget()
@@ -45,8 +50,15 @@ class Bingo:
 
     def display_image_matrix(self):
         self.generate_button.pack_forget()
-        
-        self.matrix_frame = tk.Frame(self.root)
+
+        if self.n == self.m == 5:
+            self.bingo_title = tk.Label(self.root, text="Daniel Bingo!\nDeluxe Edition", font=("Helvetica", 30), foreground="red")
+            self.bingo_title.pack(pady=30)
+        else:
+            self.bingo_title = tk.Label(self.root, text="Daniel Bingo!", font=("Helvetica", 30))
+            self.bingo_title.pack(pady=30)
+
+        self.matrix_frame = tk.Frame(self.root, pady=50)
         self.matrix_frame.pack()
 
         self.images = []
