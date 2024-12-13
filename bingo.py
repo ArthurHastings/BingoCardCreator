@@ -11,6 +11,7 @@ class Bingo:
         self.setup()
 
     def setup(self):
+        self.setWindowSize(600, 800)
         self.frame = tk.Frame(self.root, width=300, height=200)
         # self.frame.pack_propagate(False)
         self.frame.pack()
@@ -28,6 +29,7 @@ class Bingo:
         self.start_button.pack()
 
     def start(self):
+        self.setWindowSize(600, 800)
         self.bingo_size = list(self.dimensions_bingo_card.get().split(" "))
         for i in range(len(self.bingo_size)):
             self.bingo_size[i] = int(self.bingo_size[i])
@@ -48,9 +50,19 @@ class Bingo:
         self.generate_button = tk.Button(self.root, text="Generate!", command=self.display_image_matrix)
         self.generate_button.pack()
 
-    def display_image_matrix(self):
-        self.generate_button.pack_forget()
+    def setWindowSize(self, window_width, window_height):
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
 
+        center_x = int((screen_width - window_width) / 2)
+        center_y = int((screen_height - window_height) / 2)
+
+        self.root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
+
+    def display_image_matrix(self):
+        self.setWindowSize(600, 800)
+        self.generate_button.pack_forget()
+        root.geometry()
         if self.n == self.m == 5:
             self.bingo_title = tk.Label(self.root, text="Daniel Bingo!\nDeluxe Edition", font=("Helvetica", 30), foreground="red")
             self.bingo_title.pack(pady=30)
